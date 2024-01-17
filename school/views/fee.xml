@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!--form view-->
+
+    <record id="fee_view_form" model="ir.ui.view">
+        <field name="name">Fees</field>
+        <field name="model">fee.fee</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_done" string="Done" type="object" class="oe_highlight"
+                            attrs="{'invisible': [('state', 'in', ('confirm', 'cancel'))]}"/>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight"
+                    attrs="{'invisible': [('state', 'in', 'cancel')]}"/>
+                    <button name="action_cancel" string="Cancel" type="object" class="oe_highlight"
+                    attrs="{'invisible': [('state', 'in', ('draft','cancel'))]}"/>
+
+
+                    <field name="state" widget="statusbar"/>
+
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                        <field name="priority" widget="priority" class="mr-3"/></h1>
+                    </div>
+                <group>
+                    <field name="status"/>
+                    <field name="amount"/>
+                </group>
+                <group>
+                    <field name="payment"/>
+                </group>
+                <group>
+                    <field name="student_id"/>
+                    <field name="month"/>
+                </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree Views-->
+    <record id="fee_view_tree" model="ir.ui.view">
+        <field name="name">Fees</field>
+        <field name="model">fee.fee</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="status"/>
+                <field name="amount"/>
+                <field name="payment"/>
+                <field name="student_id"/>
+                <field name="month"/>
+                <field name="priority"/>
+            </tree>
+        </field>
+    </record>
+
+<!--    Calendar view-->
+
+    <record id="fee_view_calendar" model="ir.ui.view">
+        <field name="name">Fees</field>
+        <field name="model">fee.fee</field>
+        <field name="arch" type="xml">
+            <calendar string="Fee" date_start="month">
+                <field name="student_id"/>
+
+            </calendar>
+        </field>
+
+    </record>
+
+<!--    search Views-->
+    <record id="fee_view_search" model="ir.ui.view">
+        <field name="name">Fees</field>
+        <field name="model">fee.fee</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="status"/>
+                <field name="month"/>
+                <field name="amount" filter_domain="[('amount','=','12000')]"/>
+                <filter name="filter_cash" string="Cash" domain="[('payment','=','cash')]"/>
+                <separator/>
+                <filter name="filter_online" string="Online" domain="[('payment','=','online')]"/>
+
+                <group expand ="0" string="Group By">
+                    <filter string="Status" name="group_by_status" context="{'group_by':'status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!--    Action form-->
+    <record model="ir.actions.act_window" id="fee_action">
+        <field name="name">Fee</field>
+        <field name="res_model">fee.fee</field>
+        <field name="view_mode">tree,form,calendar</field>
+    </record>
+
+
+    <!--  Menu form-->
+
+    <menuitem id="school_management_menu_root" name="School Management"
+              sequence="1"/>
+    <menuitem id="fee_school_menu_root" name="Fee Information"
+              parent='school_management_menu_root' sequence="7" />
+
+    <menuitem id="fee_school_menu" name="Fee"
+              parent='fee_school_menu_root' sequence="9"
+              action="fee_action"/>
+
+    <!--    <menuitem id = "school_manager_main_menu" name = "School Manager"/>-->
+    <!--    <menuitem id = "student_main_menu" name = "Student"-->
+    <!--            parent = "school_manager_main_menu" sequence ="1" action ="student_action" />-->
+<!--groups="school.group_school_admin"-->
+
+</odoo>

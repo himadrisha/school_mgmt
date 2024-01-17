@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="report_student_fee" model="ir.actions.report">
+        <field name="name">Student Fee Report</field>
+        <field name="model">fee.fee</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">school.report_student</field>
+        <field name="report_file">school.report_student</field>
+        <field name="binding_model_id" ref="school.model_fee_fee"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <template id="report_student">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h1 align="center">Fee Report Of:<t t-esc ="o.student_id.name"/></h1>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <table border="0" style="width:100%;padding:10px; font-size:30;">
+                        <thead>
+                            <tr>
+                                <td style="font-size: x-large;">Student ID:</td>
+                                <td style="font-size: x-large;"><t t-esc="o.student_id.id" /></td>
+                                </tr>
+                             <tr>
+                                <td style="font-size: x-large;">Fee Type:</td>
+                                <td style="font-size: x-large;"><t t-esc="o.payment" /></td>
+                           </tr>
+                                <tr>
+                                <td style="font-size: x-large;">Payment Date:</td>
+                                <td style="font-size: x-large;"><t t-esc="o.month" /></td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: x-large;">Fee Amount:</td>
+                                <td style="font-size: x-large;"><t t-esc="o.amount" /></td>
+                            </tr>
+                            <tr>
+
+                                <td style="font-size: x-large;">Fee Status:</td>
+                                <td style="font-size: x-large;"><t t-esc="o.status" /></td>
+                            </tr>
+
+                        </thead>
+
+
+
+</table>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                <p style="font-size: x-large;"> Fee Payment is Successfully Submitted.</p>
+
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

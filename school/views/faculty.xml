@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!--    form view-->
+
+    <record id="faculty_view_form" model="ir.ui.view">
+        <field name="name">faculty</field>
+        <field name="model">faculty.faculty</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="sequence_number"/>
+                </header>
+                <group>
+
+                    <field name="name"/>
+
+
+
+
+                    <field name="date"/>
+                    <field name="phone"/>
+                    <field name="department_id"/>
+
+                </group>
+                <group>
+                    <field name="birth_date"/>
+                    <field name="age"/>
+                    <field name="gender"/>
+<!--                    <field name="mail"/>-->
+
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!--    Tree Views-->
+
+    <record id="faculty_view_tree" model="ir.ui.view">
+        <field name="name">faculty</field>
+        <field name="model">faculty.faculty</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence_number"/>
+                <field name="name"/>
+                <field name="date"/>
+                <field name="phone"/>
+                <field name="department_id"/>
+                <field name="birth_date"/>
+                <field name="age"/>
+                <field name="gender"/>
+<!--                <field name="mail"/>-->
+
+            </tree>
+        </field>
+    </record>
+
+
+    <!--    Action form-->
+    <record model="ir.actions.act_window" id="faculty_action">
+        <field name="name">faculty</field>
+        <field name="res_model">faculty.faculty</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!--  Menu form-->
+
+<!--    <menuitem id="school_management_menu_root" name="School Management"-->
+<!--              sequence="10"/>-->
+    <menuitem id="school_menu" name="School"
+              parent='school_management_menu_root' sequence="8"/>
+    <menuitem id="faculty_school_menu" name="Faculty Information"
+              parent='school_menu' sequence="2"
+              action="faculty_action"/>
+<!--    <menuitem id="faculty_school_menu1" name="Faculty Information"-->
+<!--              parent='school_menu' sequence="2"-->
+<!--              action="_student_action"/>-->
+
+    <!--    <menuitem id = "school_manager_main_menu" name = "School Manager"/>-->
+    <!--    <menuitem id = "student_main_menu" name = "Student"-->
+    <!--            parent = "school_manager_main_menu" sequence ="1" action ="student_action" />-->
+
+<!--groups="school.group_school_admin"-->
+</odoo>

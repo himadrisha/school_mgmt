@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_student_student,student.student,model_student_student,,1,1,1,1
+access_department_department,department.department,model_department_department,,1,1,1,1
+access_faculty_faculty,faculty.faculty,model_faculty_faculty,,1,1,1,1
+access_fee_fee,fee.fee,model_fee_fee,,1,1,1,1
+
+
+
+
+
+
+

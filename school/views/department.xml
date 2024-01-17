@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!--   form view-->
+
+    <record id="department_view_form" model="ir.ui.view">
+        <field name="name">Department</field>
+        <field name="model">department.department</field>
+        <field name="arch" type="xml">
+            <form>
+
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="action_view_faculty" icon="fa-list-ul">
+                            <field String="Faculty" name="number" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" type="object" name="action_view_student" icon="fa-list-ol">
+                            <field String="Student" name="snumber" widget="statinfo"/>
+                        </button>
+
+                    </div>
+
+                    <group>
+                        <field name="name"/>
+
+                        <field name="number"/>
+                    </group>
+
+
+                    <notebook>
+                        <page string="Faculty Information">
+
+                            <field name="faculty_ids" widget="one2many_list">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    <field name="phone"/>
+                                    <field name="birth_date"/>
+                                    <field name="age"/>
+                                    <field name="gender"/>
+                                </tree>
+                            </field>
+
+                        </page>
+                        <page string="Student Information">
+
+                            <field name="student_ids" widget="one2many_list">
+                                <tree editable="top">
+                                    <field name="name"/>
+                                    <field name="division"/>
+                                    <field name="date"/>
+                                    <field name="phone"/>
+                                    <field name="role"/>
+                                    <field name="birth_date"/>
+                                    <field name="status"/>
+                                </tree>
+                            </field>
+
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--    Tree Views-->
+    <record id="department_view_tree" model="ir.ui.view">
+        <field name="name">Department</field>
+        <field name="model">department.department</field>
+        <field name="arch" type="xml">
+
+            <tree>
+
+                <field name="name"/>
+                <field name="number"/>
+                <field name="related_model"/>
+                <field name="model_related"/>
+
+
+            </tree>
+        </field>
+    </record>
+
+
+    <!--    Action form-->
+    <record model="ir.actions.act_window" id="department_action">
+        <field name="name">Department</field>
+        <field name="res_model">department.department</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!--  Menu form-->
+
+    <menuitem id="school_management_menu_root" name="School Management"
+              sequence="1"/>
+
+    <menuitem id="department_school_menu" name="Department Information"
+              parent='school_management_menu_root' sequence="5"
+              action="department_action"/>
+
+    <!--    <menuitem id = "school_manager_main_menu" name = "School Manager"/>-->
+    <!--    <menuitem id = "student_main_menu" name = "Student"-->
+    <!--            parent = "school_manager_main_menu" sequence ="1" action ="student_action" />-->
+<!--groups="school.group_school_admin"-->
+
+</odoo>

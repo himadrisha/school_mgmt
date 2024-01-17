@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--    Category -->
+    <record model="ir.module.category" id="module_category_school">
+        <field name="name">School Management</field>
+        <field name="description">Category for School</field>
+        <field name="sequence">34</field>
+    </record>
+    <!-- Group -->
+
+    <record id="group_school_student" model="res.groups">
+        <field name="name">Student</field>
+        <field name="category_id" ref="module_category_school"/>
+    </record>
+    <record id="group_school_admin" model="res.groups">
+        <field name="name">Admin</field>
+        <field name="category_id" ref="module_category_school"/>
+<!--        <field name="implied_ids" eval="[(4,ref('group_school_student'))]"/>-->
+    </record>
+
+    <record id="group_school_faculty" model="res.groups">
+        <field name="name">Faculty</field>
+        <field name="category_id" ref="module_category_school"/>
+    </record>
+
+    <record id="group_school_department" model="res.groups">
+        <field name="name">Department</field>
+        <field name="category_id" ref="module_category_school"/>
+    </record>
+
+
+    <!--    Record Rule-->
+    <record id="student_record_rule" model="ir.rule">
+        <field name="name">Student Information Record</field>
+        <field name="model_id" ref="model_student_student"/>
+        <field name="domain_force">[('name','=',user.name)]</field>
+        <field name="groups" eval="[(4,ref('group_school_student'))]"/>
+    </record>
+    <record id="student_fee_rule" model="ir.rule">
+        <field name="name">FEE Information Record</field>
+        <field name="model_id" ref="model_fee_fee"/>
+        <field name="domain_force">[('student_id','=',user.name)]</field>
+        <field name="groups" eval="[(4,ref('group_school_student'))]"/>
+
+    </record>
+
+    <record id="student_department_rule" model="ir.rule">
+        <field name="name">department Information Record</field>
+        <field name="model_id" ref="model_department_department"/>
+        <field name="domain_force">[('student_ids','=',user.name)]</field>
+        <field name="groups" eval="[(4,ref('group_school_student'))]"/>
+
+
+    </record>
+
+    <record id="student_record_all_rule" model="ir.rule">
+        <field name="name">Student Information Record All</field>
+        <field name="model_id" ref="model_student_student"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4,ref('group_school_admin'))]"/>
+    </record>
+    <record id="fee_record_all_rule" model="ir.rule">
+        <field name="name">Fee Information Record All</field>
+        <field name="model_id" ref="model_fee_fee"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4,ref('group_school_admin'))]"/>
+    </record>
+
+    <record id="department_record_all_rule" model="ir.rule">
+        <field name="name">department Information Record All</field>
+        <field name="model_id" ref="model_department_department"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4,ref('group_school_admin'))]"/>
+    </record>
+
+
+</odoo>
+<!--<record id="student_information_record_rule" model="ir.rule">-->
+<!--    <field name="name">Student Information Record Rule</field>-->
+<!--    <field name="model_id" ref="model_student_information"/>-->
+<!--    <field name="domain_force">[('student_id', '=', user.id)]</field>-->
+<!--    <field name="perm_read" eval="True"/>-->
+<!--    <field name="perm_write" eval="False"/>-->
+<!--    <field name="perm_create" eval="False"/>-->
+<!--    <field name="perm_unlink" eval="False"/>-->
+<!--</record>-->
